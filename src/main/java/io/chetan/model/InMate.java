@@ -17,7 +17,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
-import org.apache.tomcat.jni.Address;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -45,7 +44,7 @@ public class InMate implements Comparable<InMate>
 	
 	private String aadhaarNumber ;
 	
-	@Embedded
+	//@Embedded
 	private Address address;
 	
 	private String occupation ;
