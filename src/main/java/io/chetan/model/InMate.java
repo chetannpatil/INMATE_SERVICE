@@ -44,7 +44,7 @@ public class InMate implements Comparable<InMate>
 	
 	private String aadhaarNumber ;
 	
-	//@Embedded
+	@Embedded
 	private Address address;
 	
 	private String occupation ;

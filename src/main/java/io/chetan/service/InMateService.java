@@ -33,8 +33,10 @@ public class InMateService {
 	
 	public void update(InMate inMate)
 	{
+		System.out.println("\n InMateService update()\n");
+		 //updating
 		
-		inMateDao.save(inMate);
+		 System.out.println("\nupdated inmate  = \n "+inMateDao.save(inMate));
 	}
 	
 	public void delete(long inMateId)
@@ -47,6 +49,29 @@ public class InMateService {
 		System.out.println("\n InMateService findInMatesOfAPg()\n");
 		
 		return inMateDao.findByMyPg(pgId);
+	}
+
+	public boolean findInMateByPhoneNumberAndPgId(String phoneNumber, long pgId)
+	{
+		System.out.println("\n InMateService findInMateByPhoneNumberAndPgId()\n");
+		List<InMate> list = inMateDao.findByPhoneNumberAndMyPg(phoneNumber, pgId);
+		
+		
+		if(list != null && list.size() > 0)
+		{
+			//list contains only one value 
+			System.out.println("\n InMateService findInMateByPhoneNumberAndPgId() -list contains only one value \n");
+			//return list.get(0);
+			
+			return true ;
+		}
+		else
+		{
+			System.out.println("\n InMateService findInMateByPhoneNumberAndPgId() not found\n");
+			//return null;
+			return false ;
+		}
+		
 	}
 	
 	

@@ -10,5 +10,7 @@ public interface InMateDao extends CrudRepository<InMate,Long>
 {
 
 	List<InMate> findByMyPg(long myPg);
+	
+	List<InMate> findByPhoneNumberAndMyPg(String phoneNumber,long myPg);
 
 }

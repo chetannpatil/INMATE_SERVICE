@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.chetan.model.InMate;
@@ -24,6 +25,7 @@ public class InMateController
 	@Autowired
 	private InMateService inMateService ;
 	
+	//CREATE
 	@PostMapping(value = "/create")
 	public InMate create(@RequestBody InMate inMate)
 	{
@@ -33,15 +35,7 @@ public class InMateController
 	}		
 
 	
-	@GetMapping(value = "/findById/{inMateId}")
-	public InMate findById(@PathVariable long inMateId)
-	{
-		System.out.println("\n InMateController findById()\n");
-		
-		return inMateService.findById(inMateId);
-
-	}
-	
+	//UPDATE
 	@PutMapping(value = "/update")
 	public void update(@RequestBody InMate inMate)
 	{
@@ -51,6 +45,7 @@ public class InMateController
 
 	}
 	
+	//DELETE
 	@DeleteMapping(value = "/delete/{inMateId}")
 	public void delete(@PathVariable long inMateId)
 	{
@@ -60,9 +55,20 @@ public class InMateController
 
 	}
 	
+	//READ
+	//search inmate by his id
+		@GetMapping(value = "/find/{inMateId}")
+		public InMate findById(@PathVariable long inMateId)
+		{
+			System.out.println("\n InMateController findById()\n");
+			
+			return inMateService.findById(inMateId);
+
+		}
+		
 	//load all inmates of a pg
-	@GetMapping(value = "/findAllByPgId/{pgId}")
-	public List<InMate> findInMatesOfAPg(@PathVariable long pgId)
+	@GetMapping(value = "/findAll/{pgId}")
+	public List<InMate> findAllInMatesOfAPg(@PathVariable long pgId)
 	{
 		System.out.println("\n InMateController findInMatesOfAPg()\n");
 		
@@ -70,5 +76,32 @@ public class InMateController
 
 	}
 	
+	//search inmate by his phone number & his PgId
+	//value = "/findRoomByRoomNumberAndMyPg/roomNumber/{roomNumber}/myPg/{myPg}
+//	@GetMapping(value = "/find/phoneNumber/{phoneNumber}/pgId/{pgId}")
+//	public InMate findInMateByPhoneNumberAndPgId(@RequestParam("phoneNumber") String phoneNumber,
+//			@RequestParam("pgId") long pgId)
+//	{
+//		System.out.println("\n InMateController findInMatesOfAPg()\n");
+//		
+//		return inMateService.findInMateByPhoneNumberAndPgId(phoneNumber,pgId);
+//	}
 	
+//	@GetMapping(value = "/find/{phoneNumber}/{pgId}")
+//	public InMate findInMateByPhoneNumberAndPgId(@PathVariable("phoneNumber") String phoneNumber,
+//			@PathVariable("pgId") long pgId)
+//	{
+//		System.out.println("\n InMateController findInMatesOfAPg()\n");
+//		
+//		return inMateService.findInMateByPhoneNumberAndPgId(phoneNumber,pgId);
+//	}
+	
+	@GetMapping(value = "/find/{phoneNumber}/{pgId}")
+	public boolean isInMateExist(@PathVariable("phoneNumber") String phoneNumber,
+			@PathVariable("pgId") long pgId)
+	{
+		System.out.println("\n InMateController findInMatesOfAPg()\n");
+		
+		return inMateService.findInMateByPhoneNumberAndPgId(phoneNumber,pgId);
+	}
 }
