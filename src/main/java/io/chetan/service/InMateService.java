@@ -48,6 +48,8 @@ public class InMateService {
 	{
 		System.out.println("\n InMateService findInMatesOfAPg()\n");
 		
+		//List<InMate> findByMyPg = inMateDao.findByMyPg(pgId);
+		
 		return inMateDao.findByMyPg(pgId);
 	}
 
