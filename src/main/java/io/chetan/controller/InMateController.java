@@ -1,6 +1,7 @@
 package io.chetan.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,8 @@ public class InMateController
 
 	@Autowired
 	private InMateService inMateService ;
+	
+	private static final Logger LOGGER = Logger.getLogger(InMateController.class.getName());
 	
 	//CREATE
 	@PostMapping(value = "/create")
@@ -102,4 +105,21 @@ public class InMateController
 		
 		return inMateService.findInMateByPhoneNumberAndPgId(phoneNumber,pgId);
 	}
+	
+	@GetMapping(value = "/find/phoneNumber/{phoneNumber}/password/{password}")
+	public InMate searchInMateByPhoneNumberAndPassword(@PathVariable String phoneNumber,
+			@PathVariable String password)
+	{
+		LOGGER.info("\n IC -searchInMateByPhoneNumberAndPassword - with phone = \n"+phoneNumber+"\n  psw = \n "+password);
+		
+		return inMateService.searchInMateByPhoneNumberAndPassword(phoneNumber,password);
+	}
+	@GetMapping(value = "/find/{phoneNumber}")
+	public boolean isInMateExist(@PathVariable("phoneNumber") String phoneNumber)
+	{
+		LOGGER.info("\n IC -searchInMateByPhoneNumberAndPassword - with phone = \n"+phoneNumber+"\n  \n ");
+		
+		return inMateService.isInMateExist(phoneNumber);
+	}
+	
 }

@@ -2,6 +2,7 @@ package io.chetan.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import io.chetan.model.InMate;
 @Service
 public class InMateService {
 
+	private static final Logger LOGGER = Logger.getLogger(InMateService.class.getName());
+	
 	@Autowired
 	private InMateDao inMateDao ;
 	
@@ -26,9 +29,15 @@ public class InMateService {
 	{
 		System.out.println("\n InMateService findById()\n");
 
+		//Optional<InMate> findById = inMateDao.findById(inMateId);
+		
 		Optional<InMate> inMateOptional = inMateDao.findById(inMateId);
 		
-		return inMateOptional.get() ;
+		InMate inMate = inMateOptional.get() ;
+		
+		//return inMateOptional.get() ;
+		
+		return inMate ;
 	}
 	
 	public void update(InMate inMate)
@@ -74,6 +83,26 @@ public class InMateService {
 			return false ;
 		}
 		
+	}
+
+	public InMate searchInMateByPhoneNumberAndPassword(String phoneNumber, String password)
+	{
+		LOGGER.info("\n I.service -searchInMateByPhoneNumberAndPassword - with phone = \n"+phoneNumber+"\n  psw = \n "+password);
+		
+		return inMateDao.findByPhoneNumberAndPassword(phoneNumber,password);
+	}
+
+	
+
+	public boolean isInMateExist(String phoneNumber) 
+	{
+		LOGGER.info("\n I.service -isInMateExist - with phone = \n"+phoneNumber);
+       List<InMate> list = inMateDao.findByPhoneNumber(phoneNumber);
+		
+		if(list == null || list.isEmpty())
+			return false;
+		else
+			return true ;
 	}
 	
 	
