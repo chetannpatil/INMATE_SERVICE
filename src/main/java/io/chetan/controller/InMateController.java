@@ -114,7 +114,7 @@ public class InMateController
 		
 		return inMateService.searchInMateByPhoneNumberAndPassword(phoneNumber,password);
 	}
-	@GetMapping(value = "/find/{phoneNumber}")
+	@GetMapping(value = "/find/phoneNumber/{phoneNumber}")
 	public boolean isInMateExist(@PathVariable("phoneNumber") String phoneNumber)
 	{
 		LOGGER.info("\n IC -searchInMateByPhoneNumberAndPassword - with phone = \n"+phoneNumber+"\n  \n ");
